@@ -1,0 +1,376 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./fhs.nix
+  ];
+
+  # Bootloader.
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
+  powerManagement.enable = true;
+  programs.virt-manager.enable = true;
+
+  programs.mango.enable = true;
+
+  programs.niri.enable = true;
+
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    targets.fish.enable = true;
+    targets.nixvim.enable = false;
+    targets.qt.enable = true;
+    targets.grub.enable = false;
+    image = /home/zoomer/Pictures/wallpapers/earth-in-space.png;
+  };
+
+
+
+  programs.thunar = {
+  enable = true;
+  plugins = with pkgs.xfce; [
+  thunar-archive-plugin
+  thunar-volman
+];
+};
+  programs.neovim.enable = true;
+
+  xdg.mime ={
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = ["thunar.desktop"];
+ "application/pdf" = ["org.pwmt.zathura.desktop"];
+ "application/x-pdf" = ["org.pwmt.zathura.desktop"];
+ "application/epub+zip" = ["org.pwmt.zathura.desktop"];
+ };
+ };
+      users.groups.libvirtd.members = [ "zoomer" ];
+
+  virtualisation.libvirtd.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.wlr.enable = true;
+
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
+
+  boot = {
+    loader.systemd-boot.enable = false;
+    loader.grub.enable = true;
+    loader.grub.device = "nodev";
+    loader.grub.useOSProber = true;
+    loader.grub.efiSupport = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.efi.efiSysMountPoint = "/boot";
+  };
+
+  programs.command-not-found.enable = false;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  networking = {
+    hostName = "tomtom";
+    networkmanager.wifi.macAddress = "random";
+    networkmanager.enable = true;
+  };
+  services = {
+    udisks2.enable = true;
+    gvfs.enable = true;
+    power-profiles-daemon.enable = true;
+    tumbler.enable = true;
+    gnome.gnome-keyring.enable = true;
+    atuin.enable = true;
+    blueman.enable = true;
+    keyd.enable = true;
+    upower.enable = true;
+  };
+
+  # self-hosted things
+  # services.freshrss = {
+  #   enable = true;
+  #   defaultUser = "zoomer";
+  #   authType = "form";
+  #   passwordFile = "/run/secrets/freshrss";
+  #   baseUrl = "http://freshrss";
+  # };
+
+  services.flood.package = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  # Set your time zone.
+  time.timeZone = "Africa/Casablanca";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "ar_MA.UTF-8";
+    LC_IDENTIFICATION = "ar_MA.UTF-8";
+    LC_MEASUREMENT = "ar_MA.UTF-8";
+    LC_MONETARY = "ar_MA.UTF-8";
+    LC_NAME = "ar_MA.UTF-8";
+    LC_NUMERIC = "ar_MA.UTF-8";
+    LC_PAPER = "ar_MA.UTF-8";
+    LC_TELEPHONE = "ar_MA.UTF-8";
+    LC_TIME = "ar_MA.UTF-8";
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.ly.enable = true;
+  # services.displayManager.cosmic-greeter.enable = true;
+  # services.desktopManager.cosmic.enable = true;
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  #   # Configure keymap in X11
+  # };
+
+  # fonts
+  fonts = {
+    packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+    enableDefaultPackages = true;
+  };
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  services.pipewire.pulse.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
+
+  zramSwap.enable = true;
+
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview \\{}' --scheme history";
+      con = "hx ~/.config/nixos/configuration.nix";
+      c = "clear";
+      todo = "nvim $(find ~/Documents/todo_lists/ -type f | fzf)";
+      build = "sudo nixos-rebuild switch --flake ~/.config/nixos#tomtom --upgrade --impure";
+      z = "eza --icons";
+      fs = "fastfetch";
+      m = "microfetch";
+      n = "nvim";
+      b = "y ~/Books/";
+    };
+  };
+
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      helium = pkgs.callPackage /home/zoomer/programming/nix/helium.nix { };
+      stable = import <nixos-25.05> {
+        # pass the nixpkgs config to the unstable alias # to ensure `allowUnfree = true;` is propagated:
+        config = config.nixpkgs.config;
+      };
+    };
+  };
+
+  users.users.zoomer = {
+    shell = pkgs.fish;
+    isNormalUser = true;
+    description = "zoomer";
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [
+      wget
+      iw
+      pv
+      wirelesstools
+      aircrack-ng
+      nodejs_22
+      zathura
+      gnome-epub-thumbnailer
+      helium
+      helix
+      qutebrowser
+      vimb
+      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      grim
+      wev
+      slurp
+      flameshot
+      waybar
+      vicinae
+      rofi
+      openmoji-color
+      base16-schemes
+      docker
+      mangayomi
+      anki-bin
+      planify
+      mpris-timer
+      kooha
+      collision
+      nixfmt-rfc-style
+      caligula
+      cron
+      mat2
+      eza
+      koodo-reader
+      font-manager
+      groff
+      _9base
+      killall
+      motrix
+      hakuneko
+      mako
+      protonmail-desktop
+      upscayl
+      qview
+      prismlauncher
+      wallabag
+      heroic
+      opengamepadui
+      lutris
+      nix-ld
+      steam-run
+      everest-mons
+      nix-init
+      jdk
+      python313Packages.pip
+      cmatrix
+      clock-rs
+      rustup
+      cargo
+      rustc
+      btop
+      cava
+      unrar
+      smassh
+      hyprpicker
+      appimage-run
+      cbonsai
+      zellij
+      tmux
+      qbittorrent
+      mpv
+      kew
+      amberol
+      gapless
+      ffmpeg_7-full
+      mediainfo
+      imagemagick
+      ghostscript
+      gimp
+      wf-recorder
+      spotube
+      feishin
+      legcord
+      vesktop
+      fluffychat
+      arrpc
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
+      kdePackages.kdenlive
+      feh
+      wine
+      p7zip
+      mangohud
+      antimicrox
+      fzf
+      kitty
+      foot
+      wezterm
+      viu
+      timg
+      xwayland-satellite
+      timewarrior
+      floorp-bin
+      bitwarden-desktop
+      fast-cli
+      dino
+      git
+      stow
+      lazygit
+      nixfmt
+      gcc
+      fastfetch
+      microfetch
+      unzip
+      swww
+      brightnessctl
+      wl-clipboard
+      pavucontrol
+      pulseaudio
+      nwg-look
+      papirus-icon-theme
+      rose-pine-cursor
+      nordzy-cursor-theme
+      gnome-themes-extra
+      adwaita-qt
+      adwaita-qt6
+      findutils
+      bash
+      yt-dlp
+      kdePackages.ark
+      xarchiver
+      kdePackages.qtsvg
+      niriswitcher
+      rapidraw
+      (yazi.override {
+        _7zz = _7zz-rar; # Support for RAR extraction
+      })
+    ];
+  };
+
+  programs.kdeconnect.enable = true;
+  # gaming
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime
+    ];
+  };
+  hardware.bluetooth.enable = true;
+
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+
+  programs.gamemode.enable = true;
+
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "23.05";
+}

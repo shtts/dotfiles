@@ -178,7 +178,7 @@
       con = "hx ~/.config/nixos/configuration.nix";
       c = "clear";
       todo = "nvim $(find ~/Documents/todo_lists/ -type f | fzf)";
-      build = "sudo nixos-rebuild switch --flake ~/.config/nixos#tomtom --upgrade --impure";
+      build = "sudo nixos-rebuild switch --flake ~/dotfiles/.config/nixos#tomtom --upgrade --impure";
       z = "eza --icons";
       fs = "fastfetch";
       m = "microfetch";
@@ -226,6 +226,7 @@
       flameshot
       waybar
       vicinae
+      anyrun
       rofi
       openmoji-color
       base16-schemes

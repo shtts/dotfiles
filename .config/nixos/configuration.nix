@@ -259,7 +259,6 @@
       lutris
       nix-ld
       steam-run
-      stable.steam
       everest-mons
       nix-init
       jdk
@@ -363,6 +362,7 @@
   };
   hardware.bluetooth.enable = true;
 
+  programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
   programs.gamemode.enable = true;

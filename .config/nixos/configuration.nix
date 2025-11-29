@@ -255,8 +255,8 @@
       prismlauncher
       wallabag
       heroic
-      opengamepadui
       lutris
+      faugus-launcher
       nix-ld
       steam-run
       everest-mons
@@ -277,6 +277,7 @@
       cbonsai
       zellij
       tmux
+      tmuxPlugins.nord
       qbittorrent
       mpv
       kew
@@ -312,7 +313,7 @@
       timewarrior
       floorp-bin
       bitwarden-desktop
-      fast-cli
+      speedtest
       dino
       git
       stow

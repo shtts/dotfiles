@@ -65,7 +65,6 @@
   virtualisation.libvirtd.enable = true;
 
   xdg.portal.enable = true;
-  xdg.portal.wlr.enable = true;
 
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.docker = {
@@ -260,6 +259,7 @@
       lutris
       nix-ld
       steam-run
+      stable.steam
       everest-mons
       nix-init
       jdk
@@ -295,8 +295,8 @@
       vesktop
       fluffychat
       arrpc
-      xdg-desktop-portal-wlr
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
       kdePackages.kdenlive
       feh
       wine
@@ -337,9 +337,11 @@
       adwaita-qt6
       findutils
       bash
+      zsh
       yt-dlp
       kdePackages.ark
       xarchiver
+      nautilus
       kdePackages.qtsvg
       niriswitcher
       rapidraw
@@ -361,14 +363,10 @@
   };
   hardware.bluetooth.enable = true;
 
-  programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
   programs.gamemode.enable = true;
 
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

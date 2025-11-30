@@ -216,8 +216,7 @@
       gnome-epub-thumbnailer
       helium
       helix
-      qutebrowser
-      vimb
+      obsidian
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
       grim
       wev
@@ -276,8 +275,6 @@
       appimage-run
       cbonsai
       zellij
-      tmux
-      tmuxPlugins.nord
       qbittorrent
       mpv
       kew
@@ -364,6 +361,14 @@
   hardware.bluetooth.enable = true;
 
   programs.steam.enable = true;
+
+  programs.tmux = {
+  enable = true;
+  plugins = with pkgs; [
+      tmuxPlugins.nord
+      ];
+};
+
   programs.steam.gamescopeSession.enable = true;
 
   programs.gamemode.enable = true;

@@ -30,7 +30,16 @@
 
   programs.niri.enable = true;
 
-  stylix = {
+    programs.tmux = {
+    enable = true;
+    terminal = "tmux-256color";
+
+    plugins = with pkgs.tmuxPlugins; [
+      nord
+    ];
+  };
+
+    stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     targets.fish.enable = true;
@@ -362,25 +371,6 @@
 
   programs.steam.enable = true;
 
-  programs.tmux = {
-  enable = true;
-  plugins = with pkgs; [
-      tmuxPlugins.nord
-      ];
-};
-
-        plugin = nord.overrideAttrs (old: {
-          postInstall =
-            (old.postInstall or "")
-            + ''
-              # Ensure the script has a proper bash shebang
-              if ! head -n1 $out/share/tmux-plugins/nord/nord.tmux | grep -q '^#!/usr/bin/env bash'; then
-                sed -i '1s|^#!.*|#!/usr/bin/env bash|; t; 1s|^|#!/usr/bin/env bash\n|' \
-                  $out/share/tmux-plugins/nord/nord.tmux
-              fi
-            '';
-        });
-      };
   programs.steam.gamescopeSession.enable = true;
 
   programs.gamemode.enable = true;

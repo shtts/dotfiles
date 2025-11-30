@@ -369,6 +369,18 @@
       ];
 };
 
+        plugin = nord.overrideAttrs (old: {
+          postInstall =
+            (old.postInstall or "")
+            + ''
+              # Ensure the script has a proper bash shebang
+              if ! head -n1 $out/share/tmux-plugins/nord/nord.tmux | grep -q '^#!/usr/bin/env bash'; then
+                sed -i '1s|^#!.*|#!/usr/bin/env bash|; t; 1s|^|#!/usr/bin/env bash\n|' \
+                  $out/share/tmux-plugins/nord/nord.tmux
+              fi
+            '';
+        });
+      };
   programs.steam.gamescopeSession.enable = true;
 
   programs.gamemode.enable = true;

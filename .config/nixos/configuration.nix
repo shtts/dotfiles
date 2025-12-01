@@ -237,6 +237,7 @@ nix.optimise.automatic = true;
       zathura
       gnome-epub-thumbnailer
       helix
+      home-manager
       prettierd
       obsidian
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -349,6 +350,7 @@ nix.optimise.automatic = true;
       kdePackages.ark
       xarchiver
       nautilus
+      davinci-resolve
       ncdu
       rdfind
       kdePackages.qtsvg
@@ -368,6 +370,9 @@ nix.optimise.automatic = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
+      vpl-gpu-rt
+      intel-vaapi-driver
+      intel-media-driver
     ];
   };
   hardware.bluetooth.enable = true;

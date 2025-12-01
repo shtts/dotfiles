@@ -236,8 +236,8 @@ nix.optimise.automatic = true;
       nodejs_22
       zathura
       gnome-epub-thumbnailer
-      helium
       helix
+      prettierd
       obsidian
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
       grim

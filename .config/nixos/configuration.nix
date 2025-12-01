@@ -30,7 +30,10 @@
 
   programs.niri.enable = true;
 
-    programs.tmux = {
+nix.optimise.automatic = true;
+
+
+   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
 
@@ -179,7 +182,13 @@
 
   zramSwap.enable = true;
 
-  programs.fish = {
+  programs.foot = {
+    enable = true;
+    theme = "onedark";
+  };
+
+  environment.pathsToLink = [ "share/foot" ];
+  programs.zsh = {
     enable = true;
     shellAliases = {
       ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview \\{}' --scheme history";
@@ -194,6 +203,9 @@
       b = "y ~/Books/";
     };
   };
+  programs.starship = {
+    enable = true;
+  };
 
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -206,7 +218,7 @@
   };
 
   users.users.zoomer = {
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "zoomer";
     extraGroups = [
@@ -233,13 +245,10 @@
       flameshot
       waybar
       vicinae
-      anyrun
       rofi
       openmoji-color
       base16-schemes
-      docker
       mangayomi
-      anki-bin
       planify
       mpris-timer
       kooha
@@ -249,7 +258,6 @@
       cron
       mat2
       eza
-      koodo-reader
       font-manager
       groff
       _9base
@@ -257,7 +265,6 @@
       motrix
       hakuneko
       mako
-      protonmail-desktop
       upscayl
       qview
       prismlauncher
@@ -274,7 +281,6 @@
       cmatrix
       clock-rs
       rustup
-      cargo
       rustc
       btop
       cava
@@ -283,13 +289,12 @@
       hyprpicker
       appimage-run
       cbonsai
-      zellij
       qbittorrent
       mpv
       kew
       amberol
       gapless
-      ffmpeg_7-full
+      ffmpeg_7
       mediainfo
       imagemagick
       ghostscript
@@ -310,14 +315,8 @@
       mangohud
       antimicrox
       fzf
-      kitty
-      foot
-      wezterm
-      viu
-      timg
       xwayland-satellite
       timewarrior
-      floorp-bin
       bitwarden-desktop
       speedtest
       dino
@@ -327,6 +326,7 @@
       nixfmt
       gcc
       fastfetch
+      duf
       microfetch
       unzip
       swww
@@ -342,12 +342,14 @@
       adwaita-qt
       adwaita-qt6
       findutils
-      bash
       zsh
+      fish
       yt-dlp
       kdePackages.ark
       xarchiver
       nautilus
+      ncdu
+      rdfind
       kdePackages.qtsvg
       niriswitcher
       rapidraw

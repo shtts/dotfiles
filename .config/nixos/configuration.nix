@@ -44,6 +44,7 @@ nix.optimise.automatic = true;
 
     stylix = {
     enable = true;
+    enableReleaseChecks = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     targets.fish.enable = true;
     targets.nixvim.enable = false;

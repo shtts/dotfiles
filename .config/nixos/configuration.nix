@@ -188,8 +188,7 @@ nix.optimise.automatic = true;
     theme = "onedark";
   };
 
-  environment.pathsToLink = [ "share/foot" ];
-  programs.zsh = {
+  programs.fish = {
     enable = true;
     shellAliases = {
       ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview \\{}' --scheme history";
@@ -204,10 +203,6 @@ nix.optimise.automatic = true;
       b = "y ~/Books/";
     };
   };
-  programs.starship = {
-    enable = true;
-  };
-
   nixpkgs.config = {
     packageOverrides = pkgs: {
       helium = pkgs.callPackage /home/zoomer/programming/nix/helium.nix { };
@@ -219,7 +214,7 @@ nix.optimise.automatic = true;
   };
 
   users.users.zoomer = {
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     isNormalUser = true;
     description = "zoomer";
     extraGroups = [
@@ -236,7 +231,8 @@ nix.optimise.automatic = true;
       nodejs_22
       zathura
       gnome-epub-thumbnailer
-      helix
+      evil-helix
+      zellij
       tealdeer
       home-manager
       prettierd

@@ -237,6 +237,7 @@ nix.optimise.automatic = true;
       zathura
       gnome-epub-thumbnailer
       helix
+      tealdeer
       home-manager
       prettierd
       obsidian

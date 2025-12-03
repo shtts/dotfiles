@@ -1,5 +1,7 @@
 if status is-interactive
     set -gx MANPAGER "nvim +Man!"
+    set -gx EDITOR hx
+    set -gx PATH $HOME/.emacs.d/bin $PATH
     set -g fish_greeting
     set -x XDG_CURRENT_DESKTOP wlroots
     set -gx XDG_SESSION_TYPE wayland

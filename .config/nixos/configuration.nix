@@ -114,6 +114,11 @@ nix.optimise.automatic = true;
     blueman.enable = true;
     keyd.enable = true;
     upower.enable = true;
+    emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+    defaultEditor = true;
+    };
   };
 
   # self-hosted things
@@ -201,6 +206,8 @@ nix.optimise.automatic = true;
       m = "microfetch";
       n = "nvim";
       b = "y ~/Books/";
+      tmux = "tmux -f ~/.config/tmux/tmux.conf";
+      doom = "~/.config/emacs/bin/doom";
     };
   };
   nixpkgs.config = {
@@ -232,6 +239,11 @@ nix.optimise.automatic = true;
       zathura
       gnome-epub-thumbnailer
       evil-helix
+      emacs-pgtk
+      gnumake
+      libtool
+      pandoc
+      cmake
       zellij
       tealdeer
       home-manager
@@ -333,6 +345,7 @@ nix.optimise.automatic = true;
       wl-clipboard
       pavucontrol
       pulseaudio
+      easyeffects
       nwg-look
       papirus-icon-theme
       rose-pine-cursor
@@ -347,6 +360,7 @@ nix.optimise.automatic = true;
       kdePackages.ark
       xarchiver
       nautilus
+      file-roller
       davinci-resolve
       ncdu
       rdfind
@@ -356,6 +370,8 @@ nix.optimise.automatic = true;
       (yazi.override {
         _7zz = _7zz-rar; # Support for RAR extraction
       })
+      ripgrep
+      ripgrep-all
     ];
   };
 

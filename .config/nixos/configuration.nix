@@ -272,7 +272,6 @@ environment.shellAliases = {"ls" = "ls";};
       eza
       font-manager
       groff
-      _9base
       killall
       motrix
       hakuneko

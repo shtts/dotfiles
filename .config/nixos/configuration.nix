@@ -200,7 +200,7 @@ nix.optimise.automatic = true;
       con = "hx ~/.config/nixos/configuration.nix";
       c = "clear";
       todo = "nvim $(find ~/Documents/todo_lists/ -type f | fzf)";
-      build = "sudo nixos-rebuild switch --flake ~/dotfiles/.config/nixos#tomtom --upgrade --impure";
+      build = "sudo nixos-rebuild switch --flake ~/dotfiles/.config/nixos#tomtom --upgrade";
       z = "eza --icons";
       fs = "fastfetch";
       m = "microfetch";
@@ -356,6 +356,7 @@ nix.optimise.automatic = true;
       findutils
       zsh
       fish
+      coreutils
       yt-dlp
       kdePackages.ark
       xarchiver

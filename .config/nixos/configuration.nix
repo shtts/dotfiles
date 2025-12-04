@@ -193,7 +193,7 @@ nix.optimise.automatic = true;
     theme = "onedark";
   };
 
-environment.shellAliases = {};
+environment.shellAliases = {"ls" = "ls";};
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -222,7 +222,7 @@ environment.shellAliases = {};
   };
 
   users.users.zoomer = {
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     isNormalUser = true;
     description = "zoomer";
     extraGroups = [
@@ -357,6 +357,7 @@ environment.shellAliases = {};
       findutils
       zsh
       fish
+      nushell
       coreutils
       yt-dlp
       kdePackages.ark

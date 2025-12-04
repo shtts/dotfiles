@@ -1,3 +1,7 @@
+functions --erase ls
+functions --erase l
+functions --erase ll
+
 if status is-interactive
     set -gx MANPAGER "nvim +Man!"
     set -gx EDITOR hx

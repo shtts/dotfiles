@@ -20,6 +20,7 @@
   programs.yazi = {
     enable = true;
     enableNushellIntegration = true;
+    shellWrapperName = "y"
     };
 
   programs.lazygit = {
@@ -38,7 +39,7 @@
       fs = "fastfetch";
       m = "microfetch";
       n = "nvim";
-      b = "yy ~/Books/";
+      b = "y ~/Books/";
       tmux = "tmux -f ~/.config/tmux/tmux.conf";
     };
   };
@@ -94,7 +95,7 @@
   #  /etc/profiles/per-user/zoomer/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "hx";
   };
 
   # Let Home Manager install and manage itself.

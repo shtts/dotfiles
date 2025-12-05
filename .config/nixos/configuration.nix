@@ -42,16 +42,16 @@ nix.optimise.automatic = true;
     ];
   };
 
-  #   stylix = {
-  #   enable = true;
-  #   enableReleaseChecks = false;
-  #   base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-  #   targets.fish.enable = false;
-  #   targets.nixvim.enable = false;
-  #   targets.qt.enable = true;
-  #   targets.grub.enable = false;
-  #   image = /home/zoomer/Pictures/wallpapers/earth-in-space.png;
-  # };
+    stylix = {
+    enable = true;
+    enableReleaseChecks = false;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    targets.fish.enable = false;
+    targets.nixvim.enable = false;
+    targets.qt.enable = true;
+    targets.grub.enable = false;
+    image = /home/zoomer/Pictures/wallpapers/earth-in-space.png;
+  };
 
 
 

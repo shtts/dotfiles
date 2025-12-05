@@ -327,7 +327,6 @@ environment.shellAliases = {"ls" = "ls";};
       dino
       git
       stow
-      lazygit
       nixfmt
       gcc
       fastfetch
@@ -364,9 +363,6 @@ environment.shellAliases = {"ls" = "ls";};
       kdePackages.qtsvg
       niriswitcher
       rapidraw
-      (yazi.override {
-        _7zz = _7zz-rar; # Support for RAR extraction
-      })
       ripgrep
       ripgrep-all
     ];

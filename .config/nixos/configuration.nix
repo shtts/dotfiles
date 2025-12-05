@@ -114,11 +114,6 @@ nix.optimise.automatic = true;
     blueman.enable = true;
     keyd.enable = true;
     upower.enable = true;
-    emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-    defaultEditor = true;
-    };
   };
 
   # self-hosted things
@@ -208,7 +203,6 @@ environment.shellAliases = {"ls" = "ls";};
       n = "nvim";
       b = "y ~/Books/";
       tmux = "tmux -f ~/.config/tmux/tmux.conf";
-      doom = "~/.config/emacs/bin/doom";
     };
   };
   nixpkgs.config = {
@@ -240,7 +234,6 @@ environment.shellAliases = {"ls" = "ls";};
       zathura
       gnome-epub-thumbnailer
       evil-helix
-      emacs-pgtk
       gnumake
       libtool
       pandoc
@@ -293,6 +286,7 @@ environment.shellAliases = {"ls" = "ls";};
       clock-rs
       rustup
       rustc
+      cargo
       btop
       cava
       unrar
@@ -358,6 +352,7 @@ environment.shellAliases = {"ls" = "ls";};
       fish
       nushell
       coreutils
+      tree
       yt-dlp
       kdePackages.ark
       xarchiver
